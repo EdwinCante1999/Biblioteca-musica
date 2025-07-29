@@ -4,8 +4,8 @@ import modelo.Cancion;
 
 public interface Reproductor {
 
-    void reproducir (Cancion cancion);
-    void pausar (Cancion cancion);
+    void reproducir (List<Cancion> canciones,String titulo);
+    void pausar (List<Cancion> canciones,String titulo);
     void mostrarCanciones (List <Cancion> canciones);
     void agregarCanciones (List< Cancion> canciones, Cancion cancion);
     void eliminarCancion (List < Cancion> canciones, String titulo);

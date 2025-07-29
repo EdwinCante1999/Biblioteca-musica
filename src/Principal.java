@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import interfaz.Reproductor;
 import modelo.Cancion;
 import servicio.ReproductorCancion;
@@ -7,28 +8,66 @@ import servicio.ReproductorCancion;
 public class Principal {
     public static void main(String[] args) {
 
-        Reproductor reproductor = new ReproductorCancion();
+       Scanner sc = new Scanner (System.in);
+       List <Cancion> canciones = new ArrayList<>();
+       Reproductor reproductor = new ReproductorCancion();
+       boolean continuar = true;
+       while (continuar){
+        System.out.println("***MENU BIBLIOTECA***");
+        System.out.println("1. Agregar cancion");
+        System.out.println("2. Mostrar canciones");
+        System.out.println("3. Eliminar  cancion");
+        System.out.println("4. Reproducir cancion");
+        System.out.println("5. Pausar cancion");
+        System.out.println("6. Buscar cancion");
+        System.out.println("7. Salir");
+        System.out.println("Seleccione una opcion");
 
-        Cancion cancion1 = new Cancion("perreo intenso" , "wisin y yandel " , 240);
-        Cancion cancion2 = new Cancion("propuesta indecente" , "Romeo " , 360);
-        Cancion cancion3 = new Cancion("La rebelion" , "Joe " , 199);
-        Cancion cancion4 = new Cancion("Diabla" , " wisin " , 360);
-     
-        List < Cancion> canciones = new ArrayList<>();
-        reproductor.agregarCanciones(canciones, cancion1);
-        reproductor.agregarCanciones(canciones, cancion2);
-        reproductor.agregarCanciones(canciones, cancion3);
-        reproductor.agregarCanciones(canciones, cancion4);
+        int opcion = sc.nextInt();
+        sc.nextLine();
+        switch (opcion) {
+            case 1:
+               System.out.print("Titulo");
+               String titulo = sc.nextLine();
+               System.out.print("Artista");
+               String artista = sc.nextLine();
+               System.out.print("Duracion");
+               int duracion = sc.nextInt();
+               reproductor.agregarCanciones(canciones, new Cancion(titulo, artista, duracion));
+               break;
+            case 2:
+               reproductor.mostrarCanciones(canciones);
+               break;
+            case 3:
+               System.out.println("Titulo de la cancion que desea eliminar");
+               String buscar = sc.nextLine();
+               reproductor.eliminarCancion(canciones,buscar);
+               break;
+            case 4:
+               System.out.println("Digite el titulo de la cancion que desea Reproducir"); 
+               String escuchar = sc.nextLine();
+               reproductor.reproducir(canciones,escuchar);
+               break;
+            case 5:
+               System.out.println("Digite el titulo de la cancion que desea Pausar"); 
+               String pausar = sc.nextLine();
+               reproductor.pausar(canciones, pausar);
+               break;
+            case 6:
+               System.out.println("Titulo de la cancion que desea buscar");
+               String busqueda = sc.nextLine();
+               reproductor.buscarCancion(canciones,busqueda);
+               break;
+            case 7: 
+               continuar = false;         
+        
+            default:
+            System.out.println("OPcion invalida");
+                break;
+            }
 
-        System.out.println("Canciones antes de eliminar ");
-        reproductor.mostrarCanciones(canciones);
-
-        System.out.println("Canciones despues de eliminar ");
-        reproductor.eliminarCancion(canciones, "perreo intenso");
-        reproductor.mostrarCanciones(canciones);
-        reproductor.buscarCancion(canciones,"diabla");
-
-       
-       
+        }
+        sc.close();
+        System.out.println("¡Gracias por usar la biblioteca musical! ");
     }
 }

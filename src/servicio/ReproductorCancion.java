@@ -8,13 +8,26 @@ import servicio.ReproductorCancion;
 public class ReproductorCancion implements Reproductor {
 
     @Override
-    public void reproducir(Cancion cancion) {
-       System.out.println("Reproduciendo cancion " + cancion.getTitulo());
+    public void reproducir(List<Cancion> canciones,String titulo) {
+       for(Cancion c : canciones){
+            if(c.getTitulo().equalsIgnoreCase(titulo)){
+                System.out.println("Reproduciendo cancion " + titulo);
+                return;
+            }    
+        }
+        System.out.println("Cancion no encontrada con el titulo " + titulo);
     }
 
     @Override
-    public void pausar(Cancion cancion) {
-       System.out.println("Pausando cancion " + cancion.getTitulo());
+    public void pausar(List<Cancion> canciones,String titulo) {
+        for(Cancion c : canciones){
+            if(c.getTitulo().equalsIgnoreCase(titulo)){
+                System.out.println("Pausando cancion cancion " + titulo);
+                return;
+            }    
+        }
+        System.out.println("Cancion no encontrada con el titulo" + titulo);
+       
     }
 
     @Override
